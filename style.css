@@ -5,7 +5,8 @@
 }
 
 body{
-   background: linear-gradient(-178deg, white, black);
+   /* background: linear-gradient(-178deg, white, black); */
+   background-image: url(starry-night-design.jpg);
   
 }
 
