@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,8 +17,9 @@
             </div>
 
             <div class="container">
-                <input type="text" placeholder="Enter the city name" spellcheck="false">
+                <input id="city" type="text" placeholder="Enter the city name" spellcheck="false">
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" id="state" placeholder="Enter the state (optional)" spellcheck="false">
             </div>
 
             <div class="weather">
@@ -49,20 +49,23 @@
 
         </div>
     </div>
-
-
-
     <script>
-        const apikey = "*****your API key***";
+        const apikey = "83afcdd87bf0cbbc70158ed2e833da30";
         const apiurl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const cityInput = document.getElementById("city");
+        const stateInput = document.getElementById("state");
 
-        const searchBox = document.querySelector(".container input")
+
         const searchBtn = document.querySelector(".container button")
 
-        async function checkWeather(city) {
+        async function checkWeather(city, state) {
             try {
+                let query = city;
+                if (state) {
+                    query += `,${state}`;
+                }
 
-                const response = await fetch(apiurl + city + `&appid=${apikey}`);
+                const response = await fetch(apiurl + query + `&appid=${apikey}`);
                 if (!response.ok) {
                     throw new Error("City not found");
 
@@ -75,36 +78,27 @@
                 document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
                 document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
                 document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
-
-
-
             }
             catch (error) {
                 alert(error.message);
             }
-
-
-
         }
-
         searchBtn.addEventListener("click", () => {
-            checkWeather(searchBox.value);
+            checkWeather(cityInput.value, stateInput.value);
         });
 
-        searchBox.addEventListener("keydown",(event)=>{
-            if(event.key=="Enter")
-            {
-                checkWeather(searchBox.value);
+        cityInput.addEventListener("keydown", (event) => {
+            if (event.key == "Enter") {
+                checkWeather(cityInput.value, stateInput.value);
             }
-        })
+        });
 
-
-
+        stateInput.addEventListener("keydown", (event) => {
+            if (event.key == "Enter") {
+                checkWeather(cityInput.value, stateInput.value);
+            }
+        });
         checkWeather("waknaghat");
-
-
-
-
 
     </script>
 

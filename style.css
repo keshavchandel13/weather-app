@@ -4,10 +4,10 @@
    box-sizing: border-box;
 }
 
-body{
+body {
    /* background: linear-gradient(-178deg, white, black); */
    background-image: url(starry-night-design.jpg);
-  
+
 }
 
 .card {
@@ -30,7 +30,7 @@ body{
 
 .container {
    display: flex;
-
+   flex-direction: column;
    margin: 20px auto;
 
 
@@ -44,17 +44,24 @@ body{
    border: 0px solid black;
    background: #ebfffc;
    color: #555;
+   outline: none;
+   border: none;
 
 }
 
 .container button {
-   margin-left: 6px;
+   background: transparent;
+   margin-top: -35px;
+   text-align: center;
+   display: flex;
+   margin-left: 250px;
    padding: 2px 2px 2px 2px;
    border: 0px;
    border-radius: 12px;
    height: 36px;
    width: 43px;
    cursor: pointer;
+   align-items: center;
 }
 
 
